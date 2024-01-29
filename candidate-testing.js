@@ -27,31 +27,47 @@ function askQuestion() {
   for (i = 0; i< questions.length; i++) {
     candidateAnswers[i] = input.question(questions[i]);
   }
-  console.log(candidateAnswers);
+  //console.log(candidateAnswers);
 }
 
-function gradeQuiz(candidateAnswers) {
+function gradeQuiz(answers) {
 
-  // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-  if(candidateAnswer === correctAnswer){
-    console.log("Good Job! Correct Answer!");
-  } else {
-    console.log("That's an incorrect Answer!");
-  }
+  // // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
+  // if(candidateAnswer === correctAnswer){
+  //   console.log("Good Job! Correct Answer!");
+  // } else {
+  //   console.log("That's an incorrect Answer!");
+  // }
 
 
   let grade;  //TODO 3.2 use this variable to calculate the candidates score.
+  // DECLARE THE COUNTER VARIABLE FOR NUMBER OF CORRECT ANSWERS
+  // RUN A LOOP FOR NUMBER OF QUESTIONS & COMPARE EACH CANDIDATE ANSWER WITH CORRECT ANSWER
+  //  IF ANSWERS MATCH CASE INSENSITIVELY THEN INCREASE THE COUNTER;;;;;;
+  // GRADE PERCENTAGE WILL BE CALCULATED BASED ON THIS COUNTER AS GIVEN BELOW:
+  //  (Number of Correct Answers) / (Number of Quiz Questions) * 100
 
-
+  let numOfCorrectAnswers = 0;
+  for (let index = 0; index < questions.length; index++){
+    if (answers[index].toLowerCase() === correctAnswers[index].toLowerCase()){      
+      numOfCorrectAnswers = numOfCorrectAnswers+1;
+    }
+  }
+  grade = (numOfCorrectAnswers/questions.length)*100;
   return grade;
 }
 
 function runProgram() {
   askForName();
   // TODO 1.1c: Greet candidate using their name //
-   console.log("Hello "+candidateName);
+  console.log("Hello "+candidateName);
   askQuestion();
-  gradeQuiz(this.candidateAnswers);
+  let grade = gradeQuiz(this.candidateAnswers);
+  if (grade >= 80){
+    console.log("Pass!",grade);
+  } else{
+    console.log("Fail!",grade);
+  }
 }
 
 // ----------- Don't write any code or change any code below this line ---------- //
